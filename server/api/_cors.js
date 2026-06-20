@@ -1,3 +1,6 @@
+import dotenv from 'dotenv';
+dotenv.config({ path: '.env.local' });
+
 const ALLOWED_ORIGINS = (process.env.CLIENT_URL || '')
   .split(',')
   .map(s => s.trim())
