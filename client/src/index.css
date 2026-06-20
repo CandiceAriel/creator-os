@@ -1,113 +1,123 @@
 @import "tailwindcss";
 
-:root {
-  --text: #6b6375;
-  --text-h: #08060d;
-  --bg: #fff;
-  --border: #e5e4e7;
-  --code-bg: #f4f3ec;
-  --accent: #aa3bff;
-  --accent-bg: rgba(170, 59, 255, 0.1);
-  --accent-border: rgba(170, 59, 255, 0.5);
-  --social-bg: rgba(244, 243, 236, 0.5);
-  --shadow:
-    rgba(0, 0, 0, 0.1) 0 10px 15px -3px, rgba(0, 0, 0, 0.05) 0 4px 6px -2px;
+@theme {
+  /* --- Typography --- */
+  --font-sans: "Manrope", sans-serif;
 
-  --sans: system-ui, 'Segoe UI', Roboto, sans-serif;
-  --heading: system-ui, 'Segoe UI', Roboto, sans-serif;
-  --mono: ui-monospace, Consolas, monospace;
+  /* Base */
+  --color-background: #0A0A0A;
+  --color-foreground: #FFFFFF;
+  --color-card: #121212;
+  --color-card-foreground: #FFFFFF;
+  --color-popover: #121212;
+  --color-popover-foreground: #FFFFFF;
+  --color-primary: #6B26D9;
+  --color-primary-foreground: #FFFFFF;
+  --color-secondary: #1A1A1A;
+  --color-secondary-foreground: #FFFFFF;
+  --color-muted: #1F1F1F;
+  --color-muted-foreground: #999999;
+  --color-accent: #6B26D9;
+  --color-accent-foreground: #FFFFFF;
+  --color-destructive: #EF4343;
+  --color-destructive-foreground: #FFFFFF;
+  --color-border: #242424;
+  --color-input: #242424;
+  --color-ring: #6B26D9;
+  --color-sidebar-background: #0D0D0D;
+  --color-sidebar-foreground: #CCCCCC;
+  --color-sidebar-primary: #6B26D9;
+  --color-sidebar-primary-foreground: #FFFFFF;
+  --color-sidebar-accent: #1A1A1A;
+  --color-sidebar-accent-foreground: #FFFFFF;
+  --color-sidebar-border: #242424;
+  --color-sidebar-ring: #6B26D9;
 
-  font: 18px/145% var(--sans);
-  letter-spacing: 0.18px;
-  color-scheme: light dark;
-  color: var(--text);
-  background: var(--bg);
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  --radius-DEFAULT: 0.75rem;
 
-  @media (max-width: 1024px) {
-    font-size: 16px;
-  }
-}
+  /* Status — one solid hex per status (the "500" shade), plus its lighter text variant */
+  --color-status-active: #10B981;
+  --color-status-active-text: #34D399;
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --text: #9ca3af;
-    --text-h: #f3f4f6;
-    --bg: #16171d;
-    --border: #2e303a;
-    --code-bg: #1f2028;
-    --accent: #c084fc;
-    --accent-bg: rgba(192, 132, 252, 0.15);
-    --accent-border: rgba(192, 132, 252, 0.5);
-    --social-bg: rgba(47, 48, 58, 0.5);
-    --shadow:
-      rgba(0, 0, 0, 0.4) 0 10px 15px -3px, rgba(0, 0, 0, 0.25) 0 4px 6px -2px;
-  }
+  --color-status-published: #10B981;
+  --color-status-published-text: #34D399;
 
-  #social .button-icon {
-    filter: invert(1) brightness(2);
-  }
+  --color-status-in-progress: #3B82F6;
+  --color-status-in-progress-text: #60A5FA;
+
+  --color-status-contacted: #3B82F6;
+  --color-status-contacted-text: #60A5FA;
+
+  --color-status-completed: #A855F7;
+  --color-status-completed-text: #C084FC;
+
+  --color-status-draft: #6B7280;
+  --color-status-draft-text: #9CA3AF;
+
+  --color-status-negotiating: #F59E0B;
+  --color-status-negotiating-text: #FBBF24;
+
+  --color-status-pending: #F97316;
+  --color-status-pending-text: #FB923C;
+
+  --color-status-new: #06B6D4;
+  --color-status-new-text: #22D3EE;
+
+  --color-status-overdue: #EF4444;
+  --color-status-overdue-text: #F87171;
+
+  --color-status-contracted: #8B5CF6;
+  --color-status-contracted-text: #A78BFA;
+
+  --color-status-nurture: #EC4899;
+  --color-status-nurture-text: #F472B6;
+
+  /* Border Radius Token */
+  --radius-lg: 0.75rem;
 }
 
 body {
   margin: 0;
 }
 
-#root {
-  width: 1126px;
-  max-width: 100%;
-  margin: 0 auto;
-  text-align: center;
-  border-inline: 1px solid var(--border);
-  min-height: 100svh;
-  display: flex;
-  flex-direction: column;
-  box-sizing: border-box;
+.status-active, .status-published {
+  @apply bg-status-active/20 text-status-active-text border-status-active/30;
+}
+.status-in_progress, .status-contacted {
+  @apply bg-status-in-progress/20 text-status-in-progress-text border-status-in-progress/30;
+}
+.status-completed {
+  @apply bg-status-completed/20 text-status-completed-text border-status-completed/30;
+}
+.status-draft {
+  @apply bg-status-draft/20 text-status-draft-text border-status-draft/30;
+}
+.status-negotiating {
+  @apply bg-status-negotiating/20 text-status-negotiating-text border-status-negotiating/30;
+}
+.status-pending {
+  @apply bg-status-pending/20 text-status-pending-text border-status-pending/30;
+}
+.status-new {
+  @apply bg-status-new/20 text-status-new-text border-status-new/30;
+}
+.status-overdue {
+  @apply bg-status-overdue/20 text-status-overdue-text border-status-overdue/30;
+}
+.status-contracted {
+  @apply bg-status-contracted/20 text-status-contracted-text border-status-contracted/30;
+}
+.status-nurture {
+  @apply bg-status-nurture/20 text-status-nurture-text border-status-nurture/30;
 }
 
-h1,
-h2 {
-  font-family: var(--heading);
-  font-weight: 500;
-  color: var(--text-h);
+/* Glow effects, same approach */
+.glow-purple {
+  @apply shadow-[0_0_20px] shadow-primary/30;
 }
-
-h1 {
-  font-size: 56px;
-  letter-spacing: -1.68px;
-  margin: 32px 0;
-  @media (max-width: 1024px) {
-    font-size: 36px;
-    margin: 20px 0;
-  }
+.glow-border {
+  @apply border-primary/50;
 }
-h2 {
-  font-size: 24px;
-  line-height: 118%;
-  letter-spacing: -0.24px;
-  margin: 0 0 8px;
-  @media (max-width: 1024px) {
-    font-size: 20px;
-  }
-}
-p {
-  margin: 0;
-}
-
-code,
-.counter {
-  font-family: var(--mono);
-  display: inline-flex;
-  border-radius: 4px;
-  color: var(--text-h);
-}
-
-code {
-  font-size: 15px;
-  line-height: 135%;
-  padding: 4px 8px;
-  background: var(--code-bg);
+.card-lift:hover {
+  @apply shadow-[0_0_20px] shadow-primary/20;
 }

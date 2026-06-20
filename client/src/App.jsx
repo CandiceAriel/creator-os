@@ -1,19 +1,17 @@
-import { useEffect, useState } from 'react';
-import { getCampaigns } from './api/campaigns';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Dashboard from './pages/Dashboard';
+import MainLayout from "./layouts/MainLayout";
+import CampaignsPage from "./pages/Campaigns";
 
-export default function App() {
-  const [campaigns, setCampaigns] = useState([]);
-
-  useEffect(() => {
-    getCampaigns().then(setCampaigns);
-  }, []);
-
+function App() {
   return (
-    <div className="p-6">
-      <h1 className="text-xl font-bold mb-4">Campaigns</h1>
-      {campaigns.map(c => (
-        <div key={c.id} className="border-b py-2">{c.title}</div>
-      ))}
-    </div>
+    <Routes>
+      <Route element={<MainLayout />}>
+        <Route path="/" element={<CampaignsPage />} />
+        <Route path="/campaigns" element={<CampaignsPage />} />
+      </Route>
+    </Routes>
   );
 }
+
+export default App;
