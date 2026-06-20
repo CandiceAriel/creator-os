@@ -4,75 +4,64 @@
   /* --- Typography --- */
   --font-sans: "Manrope", sans-serif;
 
-  /* Base */
-  --color-background: #0A0A0A;
-  --color-foreground: #FFFFFF;
-  --color-card: #121212;
-  --color-card-foreground: #FFFFFF;
-  --color-popover: #121212;
-  --color-popover-foreground: #FFFFFF;
+  /* Base — Inverted */
+  --color-background: #FFFFFF;
+  --color-foreground: #0A0A0A;
+  --color-card: #F8F8F8;
+  --color-card-foreground: #0A0A0A;
+  --color-popover: #FFFFFF;
+  --color-popover-foreground: #0A0A0A;
   --color-primary: #6B26D9;
   --color-primary-foreground: #FFFFFF;
-  --color-secondary: #1A1A1A;
-  --color-secondary-foreground: #FFFFFF;
-  --color-muted: #1F1F1F;
-  --color-muted-foreground: #999999;
+  --color-secondary: #F0F0F0;
+  --color-secondary-foreground: #0A0A0A;
+  --color-muted: #F0F0F0;
+  --color-muted-foreground: #6B7280;
   --color-accent: #6B26D9;
   --color-accent-foreground: #FFFFFF;
   --color-destructive: #EF4343;
   --color-destructive-foreground: #FFFFFF;
-  --color-border: #242424;
-  --color-input: #242424;
+  --color-border: #E5E5E5;
+  --color-input: #E5E5E5;
   --color-ring: #6B26D9;
-  --color-sidebar-background: #0D0D0D;
-  --color-sidebar-foreground: #CCCCCC;
+  --color-sidebar-background: #FAFAFA;
+  --color-sidebar-foreground: #4B5563;
   --color-sidebar-primary: #6B26D9;
   --color-sidebar-primary-foreground: #FFFFFF;
-  --color-sidebar-accent: #1A1A1A;
-  --color-sidebar-accent-foreground: #FFFFFF;
-  --color-sidebar-border: #242424;
+  --color-sidebar-accent: #F0F0F0;
+  --color-sidebar-accent-foreground: #0A0A0A;
+  --color-sidebar-border: #E5E5E5;
   --color-sidebar-ring: #6B26D9;
 
   --radius-DEFAULT: 0.75rem;
 
-  /* Status — one solid hex per status (the "500" shade), plus its lighter text variant */
+  /* Status — Same semantic colors */
   --color-status-active: #10B981;
-  --color-status-active-text: #34D399;
-
+  --color-status-active-text: #059669;
   --color-status-published: #10B981;
-  --color-status-published-text: #34D399;
-
+  --color-status-published-text: #059669;
   --color-status-in-progress: #3B82F6;
-  --color-status-in-progress-text: #60A5FA;
-
+  --color-status-in-progress-text: #2563EB;
   --color-status-contacted: #3B82F6;
-  --color-status-contacted-text: #60A5FA;
-
+  --color-status-contacted-text: #2563EB;
   --color-status-completed: #A855F7;
-  --color-status-completed-text: #C084FC;
-
+  --color-status-completed-text: #9333EA;
   --color-status-draft: #6B7280;
-  --color-status-draft-text: #9CA3AF;
-
+  --color-status-draft-text: #4B5563;
   --color-status-negotiating: #F59E0B;
-  --color-status-negotiating-text: #FBBF24;
-
+  --color-status-negotiating-text: #D97706;
   --color-status-pending: #F97316;
-  --color-status-pending-text: #FB923C;
-
+  --color-status-pending-text: #EA580C;
   --color-status-new: #06B6D4;
-  --color-status-new-text: #22D3EE;
-
+  --color-status-new-text: #0891B2;
   --color-status-overdue: #EF4444;
-  --color-status-overdue-text: #F87171;
-
+  --color-status-overdue-text: #DC2626;
   --color-status-contracted: #8B5CF6;
-  --color-status-contracted-text: #A78BFA;
-
+  --color-status-contracted-text: #7C3AED;
   --color-status-nurture: #EC4899;
-  --color-status-nurture-text: #F472B6;
+  --color-status-nurture-text: #DB2777;
 
-  /* Border Radius Token */
+  /* Border Radius */
   --radius-lg: 0.75rem;
 }
 
@@ -80,44 +69,45 @@ body {
   margin: 0;
 }
 
+/* Status Badges — Light Theme (darker text for readability) */
 .status-active, .status-published {
-  @apply bg-status-active/20 text-status-active-text border-status-active/30;
+  @apply bg-status-active/15 text-status-active-text border-status-active/25;
 }
 .status-in_progress, .status-contacted {
-  @apply bg-status-in-progress/20 text-status-in-progress-text border-status-in-progress/30;
+  @apply bg-status-in-progress/15 text-status-in-progress-text border-status-in-progress/25;
 }
 .status-completed {
-  @apply bg-status-completed/20 text-status-completed-text border-status-completed/30;
+  @apply bg-status-completed/15 text-status-completed-text border-status-completed/25;
 }
 .status-draft {
-  @apply bg-status-draft/20 text-status-draft-text border-status-draft/30;
+  @apply bg-status-draft/15 text-status-draft-text border-status-draft/25;
 }
 .status-negotiating {
-  @apply bg-status-negotiating/20 text-status-negotiating-text border-status-negotiating/30;
+  @apply bg-status-negotiating/15 text-status-negotiating-text border-status-negotiating/25;
 }
 .status-pending {
-  @apply bg-status-pending/20 text-status-pending-text border-status-pending/30;
+  @apply bg-status-pending/15 text-status-pending-text border-status-pending/25;
 }
 .status-new {
-  @apply bg-status-new/20 text-status-new-text border-status-new/30;
+  @apply bg-status-new/15 text-status-new-text border-status-new/25;
 }
 .status-overdue {
-  @apply bg-status-overdue/20 text-status-overdue-text border-status-overdue/30;
+  @apply bg-status-overdue/15 text-status-overdue-text border-status-overdue/25;
 }
 .status-contracted {
-  @apply bg-status-contracted/20 text-status-contracted-text border-status-contracted/30;
+  @apply bg-status-contracted/15 text-status-contracted-text border-status-contracted/25;
 }
 .status-nurture {
-  @apply bg-status-nurture/20 text-status-nurture-text border-status-nurture/30;
+  @apply bg-status-nurture/15 text-status-nurture-text border-status-nurture/25;
 }
 
-/* Glow effects, same approach */
+/* Glow effects — adjusted for light */
 .glow-purple {
-  @apply shadow-[0_0_20px] shadow-primary/30;
+  @apply shadow-[0_0_20px] shadow-primary/20;
 }
 .glow-border {
-  @apply border-primary/50;
+  @apply border-primary/40;
 }
 .card-lift:hover {
-  @apply shadow-[0_0_20px] shadow-primary/20;
+  @apply shadow-[0_0_20px] shadow-primary/15;
 }
