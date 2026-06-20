@@ -15,6 +15,7 @@ import {
   CardDescription, 
   CardContent 
 } from "../components/ui/card";
+import { cn } from "../lib/utils"
 
 function CampaignsPage() {
   const [campaigns, setCampaigns] = useState([]);
@@ -125,7 +126,35 @@ function CampaignsPage() {
       </div>
       <input></input>
       {campaigns.map(c => (
-        <div key={c.id} className="border-b py-2">{c.title}</div>
+        <Card key={c.id} className="py-4 bg-white hover:shadow-md transition-shadow">
+          <CardHeader>
+            <div className="text-left">
+              {/* Campaign Title */}
+              <CardTitle className="text-lg font-bold tracking-tight text-foreground truncate max-w-[200px]">
+                {c.title}
+              </CardTitle>
+              
+              {/* Status Badge */}
+              <CardDescription className="mt-2">
+                <span className={cn(
+                  "inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium uppercase tracking-wider",
+                  c.status === 'active' && "bg-emerald-500/10 text-status-active-text",
+                  c.status === 'negotiating' && "bg-amber-500/10 text-amber-400",
+                  c.status === 'completed' && "bg-purple-500/10 text-purple-400"
+                )}>
+                  {c.status}
+                </span>
+              </CardDescription>
+            </div>
+          </CardHeader>
+
+          {/* Optional: Add content space for budget or dates */}
+          <CardContent className="flex justify-between text-sm text-muted-foreground pt-0">
+            <span className="font-semibold text-foreground">
+              {c.start_date}
+            </span>
+          </CardContent>
+        </Card>
       ))}
     </div>
   )
