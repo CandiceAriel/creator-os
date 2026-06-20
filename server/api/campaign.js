@@ -6,27 +6,26 @@ export default withCors(async function handler(req, res) {
     const rows = await sql`SELECT * FROM campaigns ORDER BY start_date DESC`;
     return res.status(200).json(rows);
   }
-  if (req.method === 'POST') {
-    try {
-      const { brandId, title, status, budget, startDate, endDate } = req.body;
-
-      if (!title) {
-        return res.status(400).json({ error: 'Title is required' });
-      }
-
-      const newCampaign = await db.insert(campaigns).values({
-        brandId: brandId ? Number(brandId) : null,
-        title,
-        status: status || 'active',
-        budget: budget ? String(budget) : null,
-        startDate, // Matches schema key "startDate"
-        endDate,   // Matches schema key "endDate"
-      }).returning();
-
-      return res.status(201).json(newCampaign[0]);
-    } catch (error) {
-      return res.status(500).json({ error: 'Failed to create campaign' });
+ 
+   if (req.method === 'POST') {
+    const { brandId, title, status = 'active', budget, startDate, endDate } = req.body;
+ 
+    if (!title || typeof title !== 'string' || !title.trim()) {
+      return res.status(400).json({ error: 'title is required' });
     }
+    if (title.length > 255) {
+      return res.status(400).json({ error: 'title must be 255 characters or fewer' });
+    }
+    if (startDate && endDate && new Date(startDate) > new Date(endDate)) {
+      return res.status(400).json({ error: 'startDate cannot be after endDate' });
+    }
+ 
+    const [row] = await sql`
+      INSERT INTO campaigns (brand_id, title, status, budget, start_date, end_date)
+      VALUES (${brandId ?? null}, ${title}, ${status}, ${budget ?? null}, ${startDate ?? null}, ${endDate ?? null})
+      RETURNING *`;
+    return res.status(201).json(row);
   }
+  
   res.status(405).end();
 });
