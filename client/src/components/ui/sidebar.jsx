@@ -18,7 +18,7 @@ function Sidebar() {
 
   return (
     <div className="hidden lg:flex w-64 bg-sidebar-background p-6 flex-col gap-6 border-r border-white/10 h-screen">
-      <h2 className="text-xl font-bold text-white">Creator Suite</h2>
+      <h2 className="text-xl font-bold text-foreground">Creator Suite</h2>
       <nav className="flex flex-col gap-2">
         {navLinks.map((link) => {
           const Icon = link.icon; // Capitalize to render as a component
