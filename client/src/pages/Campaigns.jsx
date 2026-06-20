@@ -43,7 +43,7 @@ function CampaignsPage() {
   return (
     <div className="p-6">
       <div className='flex justify-between'>
-        <h1 className="text-2xl font-bold mb-4 font-sans text-white">Campaigns <br/> <span className='font-normal text-base text-white/50'>Manage brand partnerships and campaigns</span></h1>
+        <h1 className="text-2xl font-bold mb-4 font-sans text-foreground">Campaigns <br/> <span className='font-normal text-base text-foreground/50'>Manage brand partnerships and campaigns</span></h1>
         <Button 
           label="New Campaign" 
           icon={Plus} 
