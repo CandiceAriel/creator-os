@@ -1,68 +1,94 @@
 @import "tailwindcss";
 
 @theme {
-  /* --- Typography --- */
+
+  /* Typography */
   --font-sans: "Manrope", sans-serif;
 
-  /* Base — Inverted */
-  --color-background: #FFFFFF;
-  --color-foreground: #0A0A0A;
-  --color-card: #F8F8F8;
-  --color-card-foreground: #0A0A0A;
-  --color-popover: #FFFFFF;
-  --color-popover-foreground: #0A0A0A;
-  --color-primary: #6B26D9;
-  --color-primary-foreground: #FFFFFF;
-  --color-secondary: #F0F0F0;
-  --color-secondary-foreground: #0A0A0A;
-  --color-muted: #F0F0F0;
-  --color-muted-foreground: #6B7280;
-  --color-accent: #6B26D9;
-  --color-accent-foreground: #FFFFFF;
-  --color-destructive: #EF4343;
-  --color-destructive-foreground: #FFFFFF;
-  --color-border: #E5E5E5;
-  --color-input: #E5E5E5;
-  --color-ring: #6B26D9;
-  --color-sidebar-background: #FAFAFA;
-  --color-sidebar-foreground: #4B5563;
-  --color-sidebar-primary: #6B26D9;
-  --color-sidebar-primary-foreground: #FFFFFF;
-  --color-sidebar-accent: #F0F0F0;
-  --color-sidebar-accent-foreground: #0A0A0A;
-  --color-sidebar-border: #E5E5E5;
-  --color-sidebar-ring: #6B26D9;
+  /* Layout */
+  --color-bg: #FCFCFD;
+  --color-sidebar-bg: #FFFFFF;
+  --color-card-bg: #FFFFFF;
+  --color-popover-bg: #FFFFFF;
+  --color-list-item-bg: transparent;
+  --color-list-item-hover: #F9FAFB;
+  --color-list-item-selected: #F5F3FF;
 
-  --radius-DEFAULT: 0.75rem;
+  /* Borders */
+  --color-border: #E5E7EB;
+  --color-input-border: #E5E7EB;
+  --color-divider: #F3F4F6;
 
-  /* Status — Same semantic colors */
-  --color-status-active: #10B981;
-  --color-status-active-text: #059669;
-  --color-status-published: #10B981;
-  --color-status-published-text: #059669;
-  --color-status-in-progress: #3B82F6;
-  --color-status-in-progress-text: #2563EB;
-  --color-status-contacted: #3B82F6;
-  --color-status-contacted-text: #2563EB;
-  --color-status-completed: #A855F7;
-  --color-status-completed-text: #9333EA;
+  /* Text */
+  --color-text-primary: #111827;
+  --color-text-secondary: #6B7280;
+  --color-text-muted: #9CA3AF;
+  --color-text-inverse: #FFFFFF;
+
+  /* Brand */
+  --color-primary: #7C3AED;
+  --color-primary-hover: #6D28D9;
+  --color-accent: #8B5CF6;
+
+  /* Neutral */
+  --color-secondary: #F3F4F6;
+  --color-secondary-hover: #E5E7EB;
+
+  /* Focus */
+  --color-focus-ring: #7C3AED;
+
+  /* Charts */
+  --color-chart-primary: #7C3AED;
+  --color-chart-secondary: #A78BFA;
+  --color-chart-success: #10B981;
+  --color-chart-warning: #F59E0B;
+
+  /* Status */
+  --color-success: #15803D;
+  --color-success-bg: #DCFCE7;
+
+  --color-info: #2563EB;
+  --color-info-bg: #DBEAFE;
+
+  --color-warning: #D97706;
+  --color-warning-bg: #FEF3C7;
+
+  --color-danger: #DC2626;
+  --color-danger-bg: #FEE2E2;
+
+  /* Campaign Status */
+  --color-status-active: #15803D;
+  --color-status-active-bg: #DCFCE7;
+
+  --color-status-pending: #D97706;
+  --color-status-pending-bg: #FEF3C7;
+
+  --color-status-completed: #7C3AED;
+  --color-status-completed-bg: #EDE9FE;
+
   --color-status-draft: #6B7280;
-  --color-status-draft-text: #4B5563;
-  --color-status-negotiating: #F59E0B;
-  --color-status-negotiating-text: #D97706;
-  --color-status-pending: #F97316;
-  --color-status-pending-text: #EA580C;
-  --color-status-new: #06B6D4;
-  --color-status-new-text: #0891B2;
-  --color-status-overdue: #EF4444;
-  --color-status-overdue-text: #DC2626;
-  --color-status-contracted: #8B5CF6;
-  --color-status-contracted-text: #7C3AED;
-  --color-status-nurture: #EC4899;
-  --color-status-nurture-text: #DB2777;
+  --color-status-draft-bg: #F3F4F6;
 
-  /* Border Radius */
-  --radius-lg: 0.75rem;
+  --color-status-overdue: #DC2626;
+  --color-status-overdue-bg: #FEE2E2;
+
+  --color-status-negotiating: #EA580C;
+  --color-status-negotiating-bg: #FFEDD5;
+
+  --color-status-contracted: #7C3AED;
+  --color-status-contracted-bg: #EDE9FE;
+
+  --color-status-new: #0891B2;
+  --color-status-new-bg: #CFFAFE;
+
+  --color-status-nurture: #DB2777;
+  --color-status-nurture-bg: #FCE7F3;
+
+  /* Radius */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 20px;
 }
 
 body {
@@ -70,44 +96,60 @@ body {
 }
 
 /* Status Badges — Light Theme (darker text for readability) */
+/* Status Badges — Refactored for Tailwind v4 Theme Tokens */
 .status-active, .status-published {
-  @apply bg-status-active/15 text-status-active-text border-status-active/25;
-}
-.status-in_progress, .status-contacted {
-  @apply bg-status-in-progress/15 text-status-in-progress-text border-status-in-progress/25;
-}
-.status-completed {
-  @apply bg-status-completed/15 text-status-completed-text border-status-completed/25;
-}
-.status-draft {
-  @apply bg-status-draft/15 text-status-draft-text border-status-draft/25;
-}
-.status-negotiating {
-  @apply bg-status-negotiating/15 text-status-negotiating-text border-status-negotiating/25;
-}
-.status-pending {
-  @apply bg-status-pending/15 text-status-pending-text border-status-pending/25;
-}
-.status-new {
-  @apply bg-status-new/15 text-status-new-text border-status-new/25;
-}
-.status-overdue {
-  @apply bg-status-overdue/15 text-status-overdue-text border-status-overdue/25;
-}
-.status-contracted {
-  @apply bg-status-contracted/15 text-status-contracted-text border-status-contracted/25;
-}
-.status-nurture {
-  @apply bg-status-nurture/15 text-status-nurture-text border-status-nurture/25;
+  @apply bg-status-active-bg text-status-active border-status-active/25;
 }
 
-/* Glow effects — adjusted for light */
+.status-in_progress, .status-contacted {
+  @apply bg-status-pending-bg text-status-pending border-status-pending/25;
+}
+
+.status-completed {
+  @apply bg-status-completed-bg text-status-completed border-status-completed/25;
+}
+
+.status-draft {
+  @apply bg-status-draft-bg text-status-draft border-status-draft/25;
+}
+
+.status-negotiating {
+  @apply bg-status-negotiating-bg text-status-negotiating border-status-negotiating/25;
+}
+
+.status-pending {
+  @apply bg-status-pending-bg text-status-pending border-status-pending/25;
+}
+
+.status-new {
+  @apply bg-status-new-bg text-status-new border-status-new/25;
+}
+
+.status-overdue {
+  @apply bg-status-overdue-bg text-status-overdue border-status-overdue/25;
+}
+
+.status-contracted {
+  @apply bg-status-contracted-bg text-status-contracted border-status-contracted/25;
+}
+
+.status-nurture {
+  @apply bg-status-nurture-bg text-status-nurture border-status-nurture/25;
+}
+
+/* Glow effects & Hover Utilities */
 .glow-purple {
   @apply shadow-[0_0_20px] shadow-primary/20;
 }
+
 .glow-border {
   @apply border-primary/40;
 }
+
+.card-lift {
+  @apply transition-all duration-200;
+}
+
 .card-lift:hover {
-  @apply shadow-[0_0_20px] shadow-primary/15;
+  @apply shadow-[0_0_20px] shadow-primary/15 -translate-y-0.5;
 }

@@ -19,7 +19,7 @@ export default function Button({
 
   // Tailwind v4 design system token color variations mapping
   const variants = {
-    primary: 'bg-primary text-primary-foreground shadow-sm shadow-primary/20 hover:bg-primary/90 active:scale-[0.98]',
+    primary: 'bg-primary text-white shadow-sm shadow-primary/20 hover:bg-primary/90 active:scale-[0.98]',
     secondary: 'bg-secondary text-secondary-foreground hover:bg-muted active:scale-[0.98]',
     outline: 'border border-border bg-transparent hover:bg-secondary text-foreground',
     ghost: 'hover:bg-secondary text-muted-foreground hover:text-foreground',
