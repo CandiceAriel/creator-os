@@ -1,18 +1,18 @@
 const BASE = import.meta.env.VITE_API_URL;
 
-export async function getPayments() {
-  const res = await fetch(`${BASE}/api/payment`);
+export async function getBrands() {
+  const res = await fetch(`${BASE}/api/brands`);
   return res.json();
 }
 
 // New POST function to send data from the Frontend/Forms to the Backend
-export async function createPayment(paymentData) {
-  const res = await fetch(`${BASE}/api/payment`, {
+export async function createPayment(data) {
+  const res = await fetch(`${BASE}/api/brands`, {
     method: 'POST',
     headers: { 
       'Content-Type': 'application/json' 
     },
-    body: JSON.stringify(paymentData),
+    body: JSON.stringify(data),
   });
 
   if (!res.ok) {
