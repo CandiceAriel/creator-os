@@ -23,7 +23,9 @@ import { cn } from "../lib/utils"
 function CampaignsPage() {
   const [campaigns, setCampaigns] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-    const [isAddOpen, setIsAddOpen] = useState(false);
+  const [isAddOpen, setIsAddOpen] = useState(false);
+  const [selectedCampaign, setSelectedCampaign] = useState(null);
+  const [isDetailOpen, setIsDetailOpen] = useState(false);
 
   const [searchQuery, setSearchQuery] = useState("");
   const [statusFilter, setStatusFilter] = useState("all");
@@ -156,7 +158,14 @@ function CampaignsPage() {
         ) : (
           // ✅ FIX: Mapping over filteredCampaigns instead of campaigns array
           filteredCampaigns.map(c => (
-            <Card key={c.id} className="py-4 bg-white hover:shadow-md transition-shadow grid grid-rows-[subgrid] row-span-3 gap-0">
+            <Card 
+              key={c.id} 
+              className="py-4 bg-white hover:shadow-md transition-shadow grid grid-rows-[subgrid] row-span-3 gap-0" 
+              onClick={() => {
+                setSelectedCampaign(c);
+                setIsDetailOpen(true);
+              }}
+            >
               {/* Row 1/3: Header Block */}
               <CardHeader className="pb-3">
                 <div className="text-left">
@@ -204,7 +213,7 @@ function CampaignsPage() {
         )}
       </div>
       
-       <Dialog open={isAddOpen} onOpenChange={setIsAddOpen}>
+      <Dialog open={isAddOpen} onOpenChange={setIsAddOpen}>
         <DialogContent>
           <DialogHeader>
             <DialogTitle>New Campaign</DialogTitle>
@@ -218,6 +227,80 @@ function CampaignsPage() {
           />
         </DialogContent>
       </Dialog>
+      {/* 2. CAMPAIGN DETAILS DIALOG */}
+      <Dialog open={isDetailOpen} onOpenChange={setIsDetailOpen}>
+        <DialogContent className="sm:max-w-[500px]">
+          {selectedCampaign && (
+            <>
+              <DialogHeader>
+                <div className="items-center justify-between pr-4">
+                  <DialogTitle className="mb-1.25 text-xl font-bold">{selectedCampaign.title}</DialogTitle>
+                  <span className={cn(
+                    "inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium uppercase",
+                    selectedCampaign.status === 'active' && "bg-emerald-500/10 text-emerald-600",
+                    selectedCampaign.status === 'negotiating' && "bg-amber-500/10 text-amber-500",
+                    selectedCampaign.status === 'completed' && "bg-purple-500/10 text-purple-400"
+                  )}>
+                    {selectedCampaign.status}
+                  </span>
+                </div>
+              </DialogHeader>
+
+              <div className="space-y-6 pt-4">
+                {/* Full Description */}
+                <div>
+                  <h4 className="text-sm font-semibold text-muted-foreground mb-1">Description</h4>
+                  <p className="text-sm text-foreground leading-relaxed">
+                    {selectedCampaign.description || "No description provided for this campaign."}
+                  </p>
+                </div>
+
+                <div className="border-t border-border/60" />
+
+                {/* Budget Breakdown */}
+                <div>
+                  <h4 className="text-sm font-semibold text-muted-foreground mb-2">Budget Breakdown</h4>
+                  <div className="bg-slate-50 rounded-lg p-3 space-y-2 text-sm">
+                    <div className="flex justify-between">
+                      <span className="text-muted-foreground">Total Budget:</span>
+                      <span className="font-semibold">${selectedCampaign.budget?.toLocaleString() || '0'}</span>
+                    </div>
+                    {/* Optional fallback items if your data structure supports it */}
+                    <div className="flex justify-between text-xs text-muted-foreground pl-2">
+                      <span>• Spent:</span>
+                      <span>${selectedCampaign.budget_spent?.toLocaleString() || '0'}</span>
+                    </div>
+                    <div className="flex justify-between text-xs text-muted-foreground pl-2">
+                      <span>• Remaining:</span>
+                      <span>${((selectedCampaign.budget || 0) - (selectedCampaign.budget_spent || 0)).toLocaleString()}</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="border-t border-border/60" />
+
+                {/* Deliverable Progress */}
+                <div>
+                  <div className="flex justify-between items-center mb-2">
+                    <h4 className="text-sm font-semibold text-muted-foreground">Deliverables Progress</h4>
+                    <span className="text-xs font-medium text-foreground">
+                      {selectedCampaign.progress || 0}%
+                    </span>
+                  </div>
+                  {/* Simple Tailwind Progress Bar */}
+                  <div className="w-full bg-slate-100 rounded-full h-2.5">
+                    <div 
+                      className="bg-primary h-2.5 rounded-full transition-all duration-300" 
+                      style={{ width: `${selectedCampaign.progress || 0}%` }}
+                    />
+                  </div>
+                </div>
+              </div>
+            </>
+          )}
+        </DialogContent>
+      </Dialog>
+
     </div>
   )
 }
