@@ -7,7 +7,7 @@ function Sidebar() {
   const location = useLocation();
 
   const navLinks = [
-    { path: '/dashboard', label: 'Dashboard', icon: LayoutDashboard },
+    { path: '/', label: 'Dashboard', icon: LayoutDashboard },
     { path: '/campaigns', label: 'Campaign', icon: Megaphone },
   ];
 
@@ -17,7 +17,7 @@ function Sidebar() {
       : 'text-sidebar-foreground hover:bg-sidebar-accent/50 hover:text-white';
 
   return (
-    <div className="hidden lg:flex w-64 bg-sidebar-background p-6 flex-col gap-6 border-r border-white/10 h-screen">
+    <div className="hidden lg:flex w-64 bg-sidebar-bg p-6 flex-col gap-6 border-r border-border h-screen">
       <h2 className="text-xl font-bold text-foreground">Creator Suite</h2>
       <nav className="flex flex-col gap-2">
         {navLinks.map((link) => {
@@ -26,7 +26,7 @@ function Sidebar() {
             <Link 
               key={link.path} 
               to={link.path} 
-              className={`flex items-center gap-3 p-3 rounded-lg font-medium transition ${isActive(link.path)}`}
+              className={`flex items-center gap-3 p-3 rounded-lg font-medium transition ${isActive(link.path)} text-foreground hover:bg-primary-hover hover:text-white`}
             >
               <Icon className="w-5 h-5 shrink-0" />
               <span>{link.label}</span>

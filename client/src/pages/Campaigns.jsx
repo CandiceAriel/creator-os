@@ -8,6 +8,7 @@ import {
   CircleDollarSign 
 } from 'lucide-react';
 import Button from '../components/ui/button';
+import SearchFilters from '../components/SearchFilters';
 import { 
   Card, 
   CardHeader, 
@@ -20,7 +21,9 @@ import { cn } from "../lib/utils"
 function CampaignsPage() {
   const [campaigns, setCampaigns] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+
   const [searchQuery, setSearchQuery] = useState("");
+  const [statusFilter, setStatusFilter] = useState("all");
   
   useEffect(() => {
     getCampaigns()
@@ -51,7 +54,7 @@ function CampaignsPage() {
           // onClick={handleCreate} 
         />
       </div>
-      <div className='w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-6'>
+      <div className='w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 my-6'>
         {/* Active Cards */}
         <Card className="py-5">
           <CardHeader className="flex flex-row items-center gap-4 px-5 py-0 grid-none">
@@ -124,8 +127,15 @@ function CampaignsPage() {
           </CardHeader>
         </Card>
       </div>
-      <input></input>
-      <div className='flex flex-1 gap-3'>
+      <SearchFilters 
+        searchQuery={searchQuery}
+        onSearchChange={setSearchQuery}
+        statusFilter={statusFilter}
+        onFilterChange={setStatusFilter}
+        placeholder="Search campaigns..."
+      />
+      {/* Campaigns List */}
+      <div className='w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4'>
         {campaigns.map(c => (
           <Card key={c.id} className="py-4 bg-white hover:shadow-md transition-shadow">
             <CardHeader>
@@ -139,7 +149,7 @@ function CampaignsPage() {
                 <CardDescription className="mt-2">
                   <span className={cn(
                     "inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium uppercase tracking-wider",
-                    c.status === 'active' && "bg-emerald-500/10 text-status-active-text",
+                    c.status === 'active' && "bg-emerald-500/10 text-status-active",
                     c.status === 'negotiating' && "bg-amber-500/10 text-amber-400",
                     c.status === 'completed' && "bg-purple-500/10 text-purple-400"
                   )}>
@@ -152,7 +162,14 @@ function CampaignsPage() {
             {/* Optional: Add content space for budget or dates */}
             <CardContent className="flex justify-between text-sm text-muted-foreground pt-0">
               <span className="font-semibold text-foreground">
-                {c.start_date}
+                {c.start_date
+                  ? new Date(c.start_date).toLocaleDateString('en-US', {
+                      month: 'short',
+                      day: 'numeric',
+                      year: 'numeric'
+                    })
+                  : 'N/A'
+                }
               </span>
             </CardContent>
           </Card>
